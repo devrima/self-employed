@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Self Employed</string>
+    <string name="add_project">Add a project</string>
+    <string name="add_project_activity_label">Add a project activity</string>
+    <string name="time_label">Time spent</string>
+    <string name="activity_type">Activity Type</string>
+    <string name="submit">Submit</string>
 </resources>
