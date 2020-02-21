@@ -1,5 +1,6 @@
 package com.devrim.selfemployed.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +47,7 @@ public class AddProjectActivityActivity extends AppCompatActivity {
         activityTypes.setAdapter(activityTypeAdapter);
 
         addProject.setOnClickListener(v -> {
-           //TODO
+           startActivity(new Intent(AddProjectActivityActivity.this, AddProjectActivity.class));
         });
 
         submit.setOnClickListener(v -> {
@@ -54,14 +55,14 @@ public class AddProjectActivityActivity extends AppCompatActivity {
                 final Project selectedProject = projectAdapter.getSelectedProject();
                 final ActivityType selectedActivityType = activityTypeAdapter.getSelectedActivityType();
                 if (selectedProject == null || selectedActivityType == null) {
-                    Toast.makeText(this, R.string.choose_error, Toast.LENGTH_LONG);
+                    runOnUiThread(() -> Toast.makeText(this, R.string.choose_error, Toast.LENGTH_LONG).show());
                     return;
                 }
                 Integer timeSpentAmount;
                 try {
                     timeSpentAmount = Integer.valueOf(timeSpent.getText().toString());
                 } catch (NumberFormatException nfe) {
-                    Toast.makeText(this, R.string.time_error, Toast.LENGTH_LONG);
+                    runOnUiThread(() -> Toast.makeText(this, R.string.time_error, Toast.LENGTH_LONG).show());
                     return;
                 }
                 Activity activity = new Activity();
@@ -69,7 +70,7 @@ public class AddProjectActivityActivity extends AppCompatActivity {
                 activity.activityType = selectedActivityType;
                 activity.timeSpent = timeSpentAmount;
                 AppDatabase.getDatabase(this).getActivityDao().insertActivity(activity);
-                Toast.makeText(this, R.string.saved, Toast.LENGTH_LONG);
+                runOnUiThread(() -> Toast.makeText(this, R.string.saved, Toast.LENGTH_LONG).show());
 
                 //TODO: kill or reset?
             }).start();

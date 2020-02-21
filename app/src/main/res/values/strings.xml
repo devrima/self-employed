@@ -8,4 +8,8 @@
     <string name="choose_error">Please select valid parameters</string>
     <string name="time_error">Plese enter a valid duration</string>
     <string name="saved">saved</string>
+    <string name="activity_name">Activity name</string>
+    <string name="name_error">Please enter an activity name</string>
+    <string name="activity_created">activity created!</string>
+    <string name="add_project_label">Add Project</string>
 </resources>

@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private List<Project> projects = new ArrayList<>();
-    private int selectedPosition;
+    private int selectedPosition = -1;
 
     @NonNull
     @Override
