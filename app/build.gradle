@@ -35,8 +35,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta4"
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha01"
-    // For control over item selection of both touch and mouse driven selection
-    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc01"
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
     testImplementation 'junit:junit:4.12'

@@ -3,6 +3,7 @@ package com.devrim.selfemployed.activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.devrim.selfemployed.R;
 import com.devrim.selfemployed.adapter.ActivityTypeAdapter;
 import com.devrim.selfemployed.adapter.ProjectAdapter;
+import com.devrim.selfemployed.database.Activity;
 import com.devrim.selfemployed.database.AppDatabase;
+import com.devrim.selfemployed.database.Project;
+import com.devrim.selfemployed.model.ActivityType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,22 +42,37 @@ public class AddProjectActivityActivity extends AppCompatActivity {
         projectAdapter = new ProjectAdapter();
         projects.setAdapter(projectAdapter);
 
-        activityTypes.setAdapter(new ActivityTypeAdapter());
-
-        //TODO: implement the selection logic
+        final ActivityTypeAdapter activityTypeAdapter = new ActivityTypeAdapter();
+        activityTypes.setAdapter(activityTypeAdapter);
 
         addProject.setOnClickListener(v -> {
-            //TODO: implement data retrieval and database insertion
-            /*new Thread( () -> {
-                Activity activity = new Activity();
-                activity.
-                AppDatabase.getDatabase(this).getActivityDao().insertActivity(););
-                runOnUiThread(() -> projectAdapter.notifyDataSetChanged());
-            }).start();*/
+           //TODO
         });
 
         submit.setOnClickListener(v -> {
-            //TODO: add to data
+            new Thread( () -> {
+                final Project selectedProject = projectAdapter.getSelectedProject();
+                final ActivityType selectedActivityType = activityTypeAdapter.getSelectedActivityType();
+                if (selectedProject == null || selectedActivityType == null) {
+                    Toast.makeText(this, R.string.choose_error, Toast.LENGTH_LONG);
+                    return;
+                }
+                Integer timeSpentAmount;
+                try {
+                    timeSpentAmount = Integer.valueOf(timeSpent.getText().toString());
+                } catch (NumberFormatException nfe) {
+                    Toast.makeText(this, R.string.time_error, Toast.LENGTH_LONG);
+                    return;
+                }
+                Activity activity = new Activity();
+                activity.projectName = selectedProject.name;
+                activity.activityType = selectedActivityType;
+                activity.timeSpent = timeSpentAmount;
+                AppDatabase.getDatabase(this).getActivityDao().insertActivity(activity);
+                Toast.makeText(this, R.string.saved, Toast.LENGTH_LONG);
+
+                //TODO: kill or reset?
+            }).start();
         });
     }
 
@@ -61,7 +80,7 @@ public class AddProjectActivityActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //TODO: LiveData
-        new Thread( () -> {
+        new Thread(() -> {
             projectAdapter.setProjects(AppDatabase.getDatabase(this).getProjectDao().loadAllProjects());
             runOnUiThread(() -> projectAdapter.notifyDataSetChanged());
         }).start();
