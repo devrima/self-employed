@@ -26,6 +26,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         addActivity.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddProjectActivityActivity.class)));
-        reviewProject.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AddProjectActivityActivity.class)));
+        reviewProject.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ReviewProjectActivity.class)));
     }
 }

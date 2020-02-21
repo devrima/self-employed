@@ -14,4 +14,5 @@
     <string name="add_project_label">Add Project</string>
     <string name="add_activity">Add activities</string>
     <string name="review_project">Review time worked on a project</string>
+    <string name="review_project_label">Review Project</string>
 </resources>

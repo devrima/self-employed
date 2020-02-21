@@ -21,6 +21,20 @@ import butterknife.ButterKnife;
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private List<Project> projects = new ArrayList<>();
     private int selectedPosition = -1;
+    @Nullable
+    private final Callback callback;
+
+    public ProjectAdapter() {
+        this(null);
+    }
+
+    public ProjectAdapter(final Callback callback) {
+        this.callback = callback;
+    }
+
+    public interface Callback {
+        void onSelectionChanged(final Project project);
+    }
 
     @NonNull
     @Override
