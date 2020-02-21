@@ -12,4 +12,6 @@
     <string name="name_error">Please enter an activity name</string>
     <string name="activity_created">activity created!</string>
     <string name="add_project_label">Add Project</string>
+    <string name="add_activity">Add activities</string>
+    <string name="review_project">Review time worked on a project</string>
 </resources>
